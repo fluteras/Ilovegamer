@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}I ❤️Gamer - Bienvenue {{ user.lastname }} {{ user.firstname }}{% endblock %}
+
+{% block body %}
+    <div class="col-12 d-flex justify-content-center mt-5">
+        <div class="card border-0 shadow p-3 mb-5 bg-body-tertiary rounded w-100">
+            <div class="card-body">
+                <div class="row">
+                    {% if platforms | length == 0 %}
+                        <div class="col-12 d-flex justify-content-center">
+                            <p>Pas encore de platforme ajouté ...</p>
+                        </div>
+                    {% else %}
+                        <div class="col-6">
+                            <h2>Mes platformes ajouté</h2>
+                            <ul>
+                            {# |filter(platform => platform['name'] != "Xbox Series S/X") #}
+                                {% for platform in platforms %} 
+                                    {% set name = platform['name']|replace({'/': "¨"}) %}
+                                    {# {% if platform['name'] != "Xbox Series S/X" %} #}
+                                        <li>
+                                        <a href="{{ path('app_platform_name',{ 'name' : name }) }}"> {{ platform['name'] }} </a>
+                                        </li>
+                                    {# {% endif %} #}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="col-12 d-flex justify-content-center mt-3">
+                        <a href="{{ path('app_video_game') }}">
+                            <button class="btn btn-primary">Ajouter des jeux</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
