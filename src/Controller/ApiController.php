@@ -33,6 +33,6 @@ class ApiController extends AbstractController
             array_push($array, ["id" => $game->getId()], ["name"=> $game->getName()]);
         }
 
-        return $this->json(json_encode($array)) ?? Response::HTTP_NO_CONTENT;
+        return $this->json($array) ?? Response::HTTP_NO_CONTENT;
     }
 }
