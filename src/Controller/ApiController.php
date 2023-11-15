@@ -17,22 +17,21 @@ class ApiController extends AbstractController
         ]);
     }
     #[Route('/api/helloworld', name: 'app_api_helloWorld')]
-    public function HelloWorld(): Response
+    public function helloWorld(): Response
     {
         $array = array(["hello" => "world"]);
-        return $this->json($array) ?? Response::HTTP_OK;
+        return $this->json($array);
     }
 
     #[Route('/api/gamelist', name: 'app_api_gamelist')]
-    public function GameList(VideoGameRepository $videoGameRepository): Response
+    public function jsonGameList(VideoGameRepository $videoGameRepository): Response
     {
-
         $games = $videoGameRepository->findAll();
         $array = array();
         foreach ($games as $game) {
             array_push($array, ["id" => $game->getId()], ["name"=> $game->getName()]);
         }
 
-        return $this->json($array) ?? Response::HTTP_NO_CONTENT;
+        return $this->json($array);
     }
 }
