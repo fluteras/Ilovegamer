@@ -17,6 +17,7 @@
                             <ul>
                             {# |filter(platform => platform['name'] != "Xbox Series S/X") #}
                                 {% for platform in platforms %} 
+                                {{(platform|values|join(","))}}
                                     {% set name = platform['name']|replace({'/': "¨"}) %}
                                     {# {% if platform['name'] != "Xbox Series S/X" %} #}
                                         <li>

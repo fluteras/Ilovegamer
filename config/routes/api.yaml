@@ -1,0 +1,5 @@
+csv_reader:
+      path: /api/routing/{format}
+      controller: App\Controller\ApiController::routing
+      requirements:
+        _format:  Csv|Xml|Json

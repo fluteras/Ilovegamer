@@ -59,7 +59,7 @@ class ApiController extends AbstractController
             array_push($games, ["id" => $game->getId(),"name" => $game->getName()]);
         }
         $gamesInfo = array();
-        if (($handle = fopen("D:/Programmes/Logiciels/laragon/www/ilovegamer/Ilovegamer/var/data/games.csv", "r")) !== FALSE) {
+        if (($handle = fopen("C:/laragon/www/Ilovegamer/var/data/games.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 array_push($gamesInfo, $data);
             }
@@ -128,5 +128,18 @@ class ApiController extends AbstractController
         }
 
         return $this->json($gameDatas);
+    }
+
+    //#[Route('/api/routing/{format}', name: 'app_api_routing')]
+    public function routing(string $format, VideoGameRepository $videoGameRepository): Response
+    {
+        $format = strtolower($format);
+        $response = new Response();
+        $response->headers->set('Content-Type', sprintf("text/%s",$format));        
+        $response->setContent($format);
+        
+        return $this->render(sprintf("api/routing/%s_format.html.twig",$format), [
+            'format' => $format,
+        ]);
     }
 }
